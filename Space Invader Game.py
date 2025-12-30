@@ -46,8 +46,8 @@ def showscore(x,y):
     score = font.render("Score = "+ str(score_value),True,pygame.Color("red"))
     screen.blit(score,(x,y))
 def gameovertext():
-    gameovertext = over_font.render("Game Over",True,pygame.Color("green"))
-    screen.blit(gameovertext,(200,250))
+    overtext = over_font.render("Game Over",True,pygame.Color("green"))
+    screen.blit(overtext,(200,250))
 def player(x,y):
     screen.blit(playerImg,(x,y))
 def enemy(x,y,i):
@@ -76,25 +76,25 @@ while running:
                 firebullet(bulletX,bulletY)
         if event.type == pygame.KEYUP and event.key in [pygame.K_LEFT, pygame.K_RIGHT]:
             playerX_change = 0
-        playerX += playerX_change
-        playerX = max(0,min(playerX,500-64))
-        for i in range(6):
-            if enemyY[i]>340:
-                for j in range (6):
-                    enemyY[j] = 2000
-                gameovertext()
-                break
-            enemyX[i]+= enemyX_change[i]
-            if enemyX[i]<= 0 or enemyX[i]>=500-64:
-                enemyX_change[i]*= -1
-                enemyY[i] += enemyY_change[i]
-            if collision(enemyX[i],enemyY[i],bulletX, bulletY):
-                bulletY = 380
-                bullet_state = "ready"
-                score_value +=1
-                enemyX[i] = random.randint(0,500-64)
-                enemyY[i] = random.randint(50,150)
-            enemy(enemyX[i],enemyY[i],i)
+    playerX += playerX_change
+    playerX = max(0,min(playerX,800-64))
+    for i in range(6):
+        if enemyY[i]>340:
+            for j in range (6):
+                enemyY[j] = 2000
+            gameovertext()
+            break
+        enemyX[i]+= enemyX_change[i]
+        if enemyX[i]<= 0 or enemyX[i]>=800-64:
+            enemyX_change[i]*= -1
+            enemyY[i] += enemyY_change[i]
+        if collision(enemyX[i],enemyY[i],bulletX, bulletY):
+            bulletY = 380
+            bullet_state = "ready"
+            score_value +=1
+            enemyX[i] = random.randint(0,800-64)
+            enemyY[i] = random.randint(50,150)
+        enemy(enemyX[i],enemyY[i],i)
     if bulletY <= 0:
         bulletY = 380
         bullet_state = "ready"
